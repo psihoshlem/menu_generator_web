@@ -1,5 +1,5 @@
 <template>
-  <div class="foodcard" style="background: url('{{ recipe.picture_url }}'))">
+  <div class="foodcard" :style="url_for_img(recipe.picture_url)">
     <div class="foodcard__title">
       <div class="foodcard__title-name">
         <span>{{ recipe.title }}</span>
@@ -26,16 +26,20 @@
 </template>
 <script>
 export default {
-  props: ['recipe']
+  props: ['recipe'],
+  methods: {
+    url_for_img(picture_url){
+      var name_picture
+      name_picture = picture_url.split("/")[4]
+      return "background: url('http://127.0.0.1:8000/pics/"+name_picture+"') no-repeat center center;"
+  }
+  }
 }
 </script>
 <style lang="scss">
 .foodcard {
   background-color: #fff;
-
   max-width: 584px;
-  // max-height: 450px;
-  background: url('../img/foodcard_czezar.jpg') no-repeat center center;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;

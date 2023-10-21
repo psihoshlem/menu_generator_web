@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     go_to_recipe(item) {
-      this.$router.push({ name: 'recipe', params: { item_info: item.id } })
+      this.$router.push({ name: 'recipe', params: { item_info: item._id } })
     }
   },
   async created() {

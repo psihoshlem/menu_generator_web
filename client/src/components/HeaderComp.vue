@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
-          <img src="./../img/mainUmomLogo.png"/>
+          <img src="./../img/mainUmomLogo.png" @click="go_home()">
         </div>
         <div class="header__nav">
           <a href="" class="header__nav--link">Главная</a>
@@ -33,6 +33,9 @@ export default {
   methods: {
     go_auth() {
       router.push('/auth')
+    },
+    go_home(){
+      router.push('/')
     }
   }
 }
