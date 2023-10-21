@@ -7,14 +7,14 @@
           <div class="auth__title">Вход</div>
           <div class="auth__login field">
             <label for="login">Логин</label>
-            <input name="login" type="text">
+            <input name="login" type="text" v-model="log_auth">
           </div>
           <div class="auth__password field">
             <label for="password">Пароль</label>
-            <input name="password" type="password">
+            <input name="password" type="password" v-model="pass_auth">
           </div>
           <div class="btn" @click="go_auth()">Войти</div>
-          <div v-if="error_auth">не правильный пароль или логин</div>
+          <div v-if="error_auth">{{ error_msg }}</div>
         </div>
         <hr>
         <div class="registration authWrap">
@@ -26,23 +26,24 @@
             <label for="login">
               Логин
             </label>
-            <input name="login" type="text">
+            <input name="login" type="text" v-model="log_reg">
           </div>
           <div class="registration__password field">
             <label for="password">
               Пароль
             </label>
-            <input name="password" type="password">
+            <input name="password" type="password" v-model="pass_reg">
           </div>
           <div class="registration__repeat field">
             <label for="password_repeat">
               Повторите пароль
             </label>
-            <input name="password_repeat" type="text">
+            <input name="password_repeat" type="text" v-model="pass_repeat_reg">
           </div>
-          <div class="btn">
+          <div class="btn" @click="go_reg()">
             Зарегистрироваться
           </div>
+          <div v-if="error_reg">{{ error_msg }}</div>
         </div>
       </div>
     </div>
@@ -55,31 +56,41 @@ import router from '@/router';
 export default{
   data(){
     return{
-      pass: '',
-      log: '',
+      pass_reg: '',
+      pass_repeat_reg: '',
+      log_reg: '',
+      log_auth: '',
+      pass_auth: '',
       error_auth: false,
-      error_reg: false
+      error_reg: false,
+      error_msg: ''
     }
   },
   methods:{
     go_reg(){
-      axios.post('http://localhost:8000/reg', {
-          login: this.log,
-          password: this.pass
-      })
-      .then((response) => {
-        if (response.data == true) {
-          localStorage.setItem('auth_status', response.data)
-          router.push('/')
-        } else {
-          this.error_reg = true
-        }
-      })
+      if (this.pass_reg == this.pass_repeat_reg){
+        axios.post('http://localhost:8000/reg', {
+            login: this.log_reg,
+            password: this.pass_reg
+        })
+        .then((response) => {
+          if (response.data == true) {
+            localStorage.setItem('auth_status', response.data)
+            router.push('/')
+          } else {
+            this.error_reg = true
+            this.error_msg = "Такой логин уже существует"
+          }
+        })
+      } else {
+        this.error_reg = true
+        this.error_msg = "Пароли не совпадают ебан"
+      }
     },
     go_auth(){
       axios.post('http://localhost:8000/auth', {
-          login: this.log,
-          password: this.pass
+          login: this.log_auth,
+          password: this.pass_auth
       })
       .then((response) => {
         if (response.data == true) {
@@ -87,6 +98,7 @@ export default{
           router.push('/')
         } else {
           this.error_auth = true
+          this.error_msg = "Не верный логин или пароль"
         }
       })
     },
