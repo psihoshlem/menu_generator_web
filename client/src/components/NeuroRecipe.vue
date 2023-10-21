@@ -56,8 +56,7 @@ export default {
 }
 
 .recomendation {
-  // margin-bottom: 50px;
-  color: #fff;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,0) 99%, rgba(255,255,255,1) 100%);  color: #fff;
   // margin-top: 137px;
   display: flex;
   flex-direction: column;
@@ -142,6 +141,7 @@ export default {
     font-weight: 800;
     line-height: normal;
     color: rgba(255, 129, 57, 1);
+    transform: translateX(-40px);
   }
   &__block {
     display: flex;

@@ -78,6 +78,7 @@ export default {
   &__title {
     text-align: center;
     // margin-top: 80px;
+    padding-top: 100px;
     color: #000;
     font-family: Montserrat;
     font-size: 36px;

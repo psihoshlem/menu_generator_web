@@ -3,7 +3,9 @@
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
-          <img src="./../img/mainUmomLogo.png"/>
+          <a href="/">
+            <img src="./../img/mainUmomLogo.png"/>
+          </a>
         </div>
         <div class="header__nav">
           <a href="" class="header__nav--link">Главная</a>

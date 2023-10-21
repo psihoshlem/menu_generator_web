@@ -1,6 +1,13 @@
 <template>
-  <router-view></router-view>
-  <FooderComp />
+  <div class="general-wrapper">
+    <div class="main-cont">
+      <router-view></router-view>
+    </div>
+    <div class="middle-cont"></div>
+    <div class="footer-cont">
+      <FooderComp />
+    </div>
+  </div>
 </template>
 <script>
 import FooderComp from './components/FooderComp.vue';
@@ -21,6 +28,33 @@ body{
   margin-left: auto;
   margin-right: auto;
   backdrop-filter: blur(5px);
+}
+
+body,
+html{
+  height: 100%;
+}
+
+.general-wrapper{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.middle-cont{
+  background-color: #fff;
+  flex: 1 1 auto;
+}
+
+body::-webkit-scrollbar {
+  width: 4px;
+}
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #FF8139;
+  border-radius: 20px;
 }
 /* Reset and base styles  */
 * {
