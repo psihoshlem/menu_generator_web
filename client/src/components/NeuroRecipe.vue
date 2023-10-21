@@ -25,15 +25,18 @@
               ~{{ item.time }} мин
             </span>
             <span class="card__desc-sostav">
-              <span>Состав</span>
+              <span>Состав:</span>
               {{ item.compound }}
             </span>
             <p class="card__desc-history">
-              <span>Описание</span>
+              <span>Описание:</span>
               {{ item.description }}
             </p>
           </div>
         </div>
+      </div>
+      <div class="neuro_btn">
+        <button>Подробнее</button>
       </div>
     </div>
   </section>
@@ -200,6 +203,18 @@ export default {
         font-weight: 800;
       }
     }
+  }
+}
+.neuro_btn{
+  margin-top: 50px;
+  font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  button{
+    background-color: #ff8139;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 25px;
   }
 }
 

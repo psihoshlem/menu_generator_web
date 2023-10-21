@@ -223,7 +223,7 @@ export default {
         .recipe__description{
             margin: 0 auto;
             width: 1300px;
-            height: 400px;
+            max-height: 400px;
             background-color: #18274B1F;
             border-radius: 25px;
             display: flex;
@@ -244,6 +244,7 @@ export default {
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+                padding-bottom: 30px;
 
                 span{
                     font-weight: 800;
