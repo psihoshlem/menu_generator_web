@@ -1,0 +1,138 @@
+<template>
+  <section class="Auth">
+    <div class="inner">
+      <div class="Auth__block">
+        <div class="auth authWrap">
+          <div class="auth__title">Вход</div>
+          <div class="auth__login field">
+            <label for="login">Логин</label>
+            <input name="login" type="text">
+          </div>
+          <div class="auth__password field">
+            <label for="password">Пароль</label>
+            <input name="password" type="password">
+          </div>
+          <div class="btn">Войти</div>
+        </div>
+        <hr>
+        <div class="registration authWrap">
+          <div class="registration__title">Регистрация</div>
+          <div class="registration__login field">
+            <label for="login">Логин</label>
+            <input name="login" type="text">
+          </div>
+          <div class="registration__password field">
+            <label for="password">Пароль</label>
+            <input name="password" type="password">
+          </div>
+          <div class="registration__repeat field">
+            <label for="password_repeat">Логин</label>
+            <input name="password_repeat" type="text">
+          </div>
+          <div class="registration__email field ">
+            <label for="mail">Email</label>
+            <input name="mail" type="mail">
+          </div>
+          <div class="btn">
+            Регестрация
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+<style lang="scss">
+.Auth {
+  margin-top: 150px;
+
+  &__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    //padding-left: 280px;
+    align-items: center;
+  }
+
+  .auth {
+    min-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  .registration {
+    width: 500px;
+
+    &__title {
+      text-align: center;
+      color: #000;
+      font-family: Montserrat;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    width: 100%;
+
+    label {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 20px;
+      border: 3px solid #FF8139;
+      background: #FFF;
+      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
+    }
+  }
+
+  .authWrap {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+
+  .btn {
+    text-align: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 20px;
+    background: #FF8139;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  hr {
+    transform: rotate(90deg);
+    height: 3px;
+    background: #D8D8D8;
+    width: 480px;
+  }
+}
+</style>

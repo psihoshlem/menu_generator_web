@@ -1,0 +1,77 @@
+<template>
+  <header class="header">
+    <div class="inner">
+      <div class="header__block">
+        <div class="header__logo">
+          UmomБлюдо
+        </div>
+        <div class="header__nav">
+          <a href="" class="header__nav--link">Главная</a>
+          <a href="" class="header__nav--link">Все рецепты</a>
+          <a href="" class="header__nav--link">Съедено</a>
+          <a href="" class="header__nav--link">Избранное</a>
+        </div>
+        <div class="header__info header__nav--link" v-if="auth">
+          Выход
+        </div>
+        <div class="header__info header__nav--link" v-else @click="go_auth">
+          Вход / Регестрация
+          <!-- <router-link to="/auth">Вход / Рsегестрация</router-link> -->
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+<script>
+import router from '@/router';
+
+export default {
+  data() {
+    return {
+      auth: false
+    }
+  },
+  methods: {
+    go_auth() {
+      router.push('/auth')
+    }
+  }
+}
+</script>
+<style lang="scss">
+.inner {
+  margin: 0 auto;
+  max-width: 1600px;
+  width: 95%;
+}
+
+.header {
+  &__block {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+
+    &--link {
+      text-decoration: none;
+      color: #000;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  &__info {
+    cursor: pointer;
+
+  }
+}
+</style>
