@@ -11,7 +11,7 @@
                     </div>
                     <div class="recipe__title-time">
                         <img src="./../img/recipe_clock.png" alt="">
-                        <span>~{{  recipe.cooking_time }}:00</span>
+                        <span>~{{  recipe.cooking_time }} мин</span>
                     </div>
                 </div>
                 <div class="recipe__content">
@@ -20,12 +20,12 @@
                             <img :src="img_for_recipe(recipe.picture_url)" alt="">
                         </div>
                         <div class="recipe__composition">
-                            <span>Состав:</span>
+                            <span>Ингредиенты :</span>
                             <div class="recipe__dishes">
                                 <div class="dish" v-for="item in recipe.ingredients" :key="item.id">
                                     <div>{{ item.name }}</div>
                                     <div></div>
-                                    <div>{{ item.count }}{{ item.unit }}</div>
+                                    <div>{{ output_count(item) }}</div>
                                 </div>
                             </div>
                         </div>
@@ -59,9 +59,9 @@ export default {
     await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
       .then((response) => {
         if (response.status == 200) {
+            console.log(response.data)
             this.recipe = response.data
             this.recipe_star = this.recipe["number of servings"]
-            console.log(this.recipe)
         }
       })
   },
@@ -69,12 +69,18 @@ export default {
     img_for_recipe(picture_url) {
         if (picture_url) {
             let name_picture = picture_url.split("/")[4];
-            console.log(name_picture);
             return "http://127.0.0.1:8000/pics/" + name_picture;
         } else {
             return "";
         }
+    },
+    output_count(item){
+        if (item.count == 0){
+            return item.unit
+        } else {
+            return item.count + item.unit
         }
+    }
   }
 }
 </script>

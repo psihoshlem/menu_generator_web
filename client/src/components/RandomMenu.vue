@@ -61,7 +61,6 @@ export default {
     })
       .then((response) => {
         if (response.status == 200) {
-          console.log(response)
           this.all_recipes = response.data
         }
       })

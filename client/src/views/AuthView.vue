@@ -14,35 +14,80 @@
             <label for="password">Пароль</label>
             <input name="password" type="password">
           </div>
-          <div class="btn">Войти</div>
+          <div class="btn" @click="go_auth()">Войти</div>
+          <div v-if="error_auth">не правильный пароль или логин</div>
         </div>
         <hr>
         <div class="registration authWrap">
           <div class="registration__title">Регистрация</div>
-          <div class="registration__login field">
-            <label for="login">Логин</label>
-            <input name="login" type="text">
-          </div>
-          <div class="registration__password field">
-            <label for="password">Пароль</label>
-            <input name="password" type="password">
-          </div>
-          <div class="registration__repeat field">
-            <label for="password_repeat">Логин</label>
-            <input name="password_repeat" type="text">
-          </div>
           <div class="registration__email field ">
             <label for="mail">Email</label>
             <input name="mail" type="mail">
           </div>
-          <div class="btn">
+          <div class="registration__login field">
+            <label for="login">Логин</label>
+            <input name="login" type="text" v-model="log">
+          </div>
+          <div class="registration__password field">
+            <label for="password">Пароль</label>
+            <input name="password" type="password" v-model="pass">
+          </div>
+          <div class="btn" @click="go_reg()">
             Регестрация
+          </div>
+          <div v-if="error_reg">
+            существует такой логин
           </div>
         </div>
       </div>
     </div>
   </section>
 </template>
+<script>
+import axios from 'axios';
+import router from '@/router';
+
+export default{
+  data(){
+    return{
+      pass: '',
+      log: '',
+      error_auth: false,
+      error_reg: false
+    }
+  },
+  methods:{
+    go_reg(){
+      axios.post('http://localhost:8000/reg', {
+          login: this.log,
+          password: this.pass
+      })
+      .then((response) => {
+        if (response.data == true) {
+          localStorage.setItem('auth_status', response.data)
+          router.push('/')
+        } else {
+          this.error_reg = true
+        }
+      })
+    },
+    go_auth(){
+      axios.post('http://localhost:8000/auth', {
+          login: this.log,
+          password: this.pass
+      })
+      .then((response) => {
+        if (response.data == true) {
+          localStorage.setItem('auth_status', response.data)
+          router.push('/')
+        } else {
+          this.error_auth = true
+        }
+      })
+    },
+  }
+}
+</script>
 <style lang="scss">
 .Auth {
   background-color: #FFF;
