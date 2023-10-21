@@ -8,6 +8,13 @@ def add_recipe(recipe):
     result = collection.insert_one(recipe)
     return result.inserted_id
 
+def get_short_recipe_by_id(id: str):
+    result = collection.find_one(
+        {"_id": ObjectId(id)}, {"title":1, "cooking_time": 1, "description": 1, "picture_url": 1}
+    )
+    result["_id"] = str(result["_id"])
+    return result
+
 def get_recipes_from_db():
     recipes_obj = collection.find(
         {}, {"title":1, "cooking_time": 1, "description": 1, "picture_url": 1}
