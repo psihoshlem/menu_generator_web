@@ -5,15 +5,12 @@
         <div class="search__view">
           <img src="./../img/main-man-logo.png" alt="">
           <input type="text" class="search__input"
-            placeholder="Давайте найдем что то вкусное"
-            @focus="focused = true"
+            placeholder="Давайте найдем что то вкусное" @focus="openModal"
             v-model="value_input"
-            @input="input_writing()
-            "
           >
         </div>
-        <span v-if="focused" class="modal"></span>
-        <div class="search__block" v-if="focused" @focus="focused = true">
+        <span v-if="focused" class="modal" @click="closeModal"></span>
+        <div class="search__block" v-if="focused" @click.stop>
           <div class="search__products">
             <a href="" v-for="item in search_product" :key="item.id">
               <span class="product">
@@ -21,86 +18,204 @@
               </span>
             </a>
           </div>
-          <div>
-            включить продукты
-            <input v-model="input_add_product" v-on:keyup.enter="add_product(input_add_product)">
-            <button @click="add_product(input_add_product)">добавить</button>
-            добавлено: <span v-for="item in added_products" :key="item.id">{{ item }}</span>
-          </div>
-          <div>
-            исключить продукты
-            <input v-model="input_exclude_product" v-on:keyup.enter="exclude_product(input_exclude_product)">
-            <button @click="exclude_product(input_exclude_product)">исключить</button>
-            исключено: <span v-for="item in excluded_products" :key="item.id">{{ item }}</span>
-          </div>
           <div class="search__time-block" @blur="focused = false">
             <div class="time__title">Параметры поиска</div>
-            <div class="time__desc">Время готовки в минутах:</div>
-            <div class="time__slide slidecontainer">
-              <input type="range" name="participants" min="0" max="120" value="20">
-              <span class="rangeslider__tooltip" id="range-tooltip"></span>
+            <div class="search__params">
+              <div class="search__params-add-products">
+                <span>+ Включить продукты:</span>
+                <div class="add-product">
+                  <input type="text" placeholder="Введите желаемый продукт">
+                  <button class="add-btn">Добавить</button>
+                </div>
+                <span>Добавлено:</span>
+                <div class="adds_products">
+                  <label class="adds_product">
+                    Картошка
+                  </label>
+                  <label class="adds_product">
+                    Картошка
+                  </label>
+                </div>
+              </div>
+              <div class="search__params-del-products">
+                <span>- Исключить продукты:</span>
+                <div class="del-product">
+                  <input type="text" placeholder="Введите нежелаемый продукт">
+                  <button class="del-btn">Исключить</button>
+                </div>
+                <span>Исключено:</span>
+                <div class="dels_products">
+                  <label class="dels_product">
+                    Капуста
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="time__desc">Время готовки в минутах:
+              <div class="time__slide">
+                <input type="range" name="participants" min="5" max="120" value="20" oninput="rangeValue.innerText = this.value">
+                <div>
+                  <span id="rangeValue">20</span> мин
+                </div>
+              </div>
             </div>
           </div>
           <div class="search__grade">
             Рейтинг
             <div class="search__grade-block">
-              <label for="grade">Звезд</label>
+              <label for="grade">Звезд:</label>
               <input type="number" max="5" value="0">
             </div>
           </div>
-          <div class="search__block--btn btn" @click="go_to_search()">Поиск</div>
+          <div class="search__block--btn btn" @click="focused = false">Поиск</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios';
-
 export default {
+  // props: ['onLogin'],
   data() {
     return {
       search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
-      value_input: '',
-      input_add_product: '',
-      input_exclude_product: '',
-      added_products: [],
-      excluded_products: [],
-      finish_search: []
+      value_input: ''
     }
   },
-  methods:{
-    add_product(input_add_product){
-      this.added_products.push(input_add_product)
-      this.input_add_product = ''
+  methods: {
+    openModal() {
+      this.focused = true;
+      // Добавьте обработчик события для закрытия модального окна при клике вне его
+      window.addEventListener('click', this.closeModal);
     },
-    exclude_product(input_exclude_product){
-      this.excluded_products.push(input_exclude_product)
-      this.input_exclude_product = ''
-    },
-    input_writing(){
-      if (localStorage.getItem('login')){
-        axios.post('http://localhost:8000/recipes', {
-          login: String(localStorage.getItem('login')),
-          query: this.value_input,
-          desirable_ingredients: this.added_products,
-          excluded_ingredients: this.excluded_products
-        })
-        .then((response) => {
-          this.finish_search = response.data
-        })
+    closeModal(event) {
+      if (!this.$el.contains(event.target)) {
+        this.focused = false;
+        window.removeEventListener('click', this.closeModal);
       }
-    },
-    go_to_search(){
-      this.focused = false
-      const str_output = JSON.stringify({login: String(localStorage.getItem('login')), query: this.value_input, desirable_ingredients: this.added_products, excluded_ingredients: this.excluded_products})
-      this.$router.push({ path: '/search', query:{output_data: str_output}});
     }
   }
 }
 </script>
 <style lang="scss">
+.time__slide input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background-color: #FF5733;
+}
+.time__slide input[type="range"] {
+    width: 400px;
+    background-color: #FF5733;
+}
+
+.search__params{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  font-family: Montserrat;
+
+  &-add-products{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 25px;
+    padding: 30px;
+
+    span{
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .add-product{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      input{
+        margin: 20px 0;
+        width: 425px;
+        height: 51px;
+        border: 3px solid #FF8139;
+        font-size: 24px;
+      }
+
+      button{
+        width: 155px;
+        height: 51px;
+        color: #fff;
+        background-color: #FF8139;
+        border-radius: 15px;
+        font-size: 20px;
+      }
+    }
+
+    .adds_products{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .adds_product{
+        border: 3px solid #FF8139;
+        color: #FF8139;
+        font-size: 24px;
+        padding: 10px 20px;
+        border-radius: 25px;
+      }
+    }
+  }
+
+  &-del-products{
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 25px;
+    padding: 30px;
+
+    span{
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .del-product{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      input{
+        margin: 20px 0;
+        width: 425px;
+        height: 51px;
+        border: 3px solid #7E1700;
+        font-size: 24px;
+      }
+
+      button{
+        width: 155px;
+        height: 51px;
+        color: #fff;
+        background-color: #7E1700;
+        border-radius: 15px;
+        font-size: 20px;
+      }
+
+    }
+    .dels_products{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .dels_product{
+        border: 3px solid #7E1700;
+        color: #7E1700;
+        font-size: 24px;
+        padding: 10px 20px;
+        border-radius: 25px;
+      }
+    }
+  }
+}
+
 .finder{
   background-color: #FFF;
 }
@@ -109,7 +224,7 @@ export default {
   margin: 0 auto;
   max-width: 1600px;
   width: 95%;
-  
+
 }
 
 .search {
@@ -117,12 +232,12 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  
+
   &__view{
     display: flex;
     align-items: center;
     height: 444px;
-    
+
     & img{
       height: 444px;
       position: absolute;
@@ -130,10 +245,10 @@ export default {
       transform: translateX(-200px);
     }
   }
-  
+
   input {
-    z-index: 1;
-    width: 900px;
+    z-index: 999;
+    width: 980px;
     border-radius: 13px;
     border: 4px solid #FF8139;
     background: #FFF;
@@ -145,7 +260,6 @@ export default {
     font-weight: 300;
     font-style: italic;
     font-size: 24px;
-    // position: relative;
   }
 
   &__block {
@@ -203,6 +317,9 @@ export default {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    padding: 10px 0;
   }
 
   .time {
@@ -224,11 +341,12 @@ export default {
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+      border-top: 1px solid rgba(128, 128, 128, 0.5);
+      border-bottom: 1px solid rgba(128, 128, 128, 0.5);
     }
   }
 
   &__grade {
-    //margin-top: 40px;
     display: flex;
     flex-direction: column;
     color: #000;
@@ -237,20 +355,20 @@ export default {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    padding: 10px 0;
 
     &-block {
       margin-top: 19px;
       display: flex;
       flex-direction: row;
-      //justify-content: center;
       align-items: flex-start;
+      align-items: center;
+      gap: 10px;
 
       input {
-        margin-left: 8px;
-        padding: 0;
-        padding-left: 5px;
-        width: 30px;
-        height: 30px;
+        width: 70px;
+        height: 50px;
       }
 
       label {
@@ -264,155 +382,21 @@ export default {
     }
   }
 
-  .search__block{
-  }
   .modal {
-    position: fixed; /* фиксированное положение */
+    position: fixed; 
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0,0,0,0.5); /* цвет фона */
+    background: rgba(0,0,0,0.5); 
     z-index: 1;
-    // opacity: 0; /* по умолчанию модальное окно прозрачно */
+    // opacity: 0; 
     -webkit-transition: opacity 200ms ease-in; 
     -moz-transition: opacity 200ms ease-in;
-    transition: opacity 200ms ease-in; /* анимация перехода */
-    pointer-events: none; /* элемент невидим для событий мыши */
+    transition: opacity 200ms ease-in;
+    pointer-events: none; 
     margin: 0;
     padding: 0;
-  }
-}
-
-.time__slide {
-
-  .rangeslider__tooltip {
-    display: block;
-    margin-top: 2.5em;
-    font-size: 12px;
-    color: #a59eb5;
-  }
-
-  .rangeslider,
-  input[type='range'] {
-    max-width: 400px;
-  }
-
-  .rangeslider__handle {
-    border-radius: 22px;
-    line-height: 42px;
-    text-align: center;
-    font-weight: bold;
-
-    &:after {
-      background: 0;
-    }
-  }
-
-  .rangeslider,
-  .rangeslider__fill {
-    display: block;
-    border-radius: 10px;
-  }
-
-  .rangeslider {
-    background: #e6e5ea;
-    background-image:
-      linear-gradient(to right,
-        #4bc67d 30%, #f1c40f 45%, #b94a48 99%);
-    position: relative;
-  }
-
-  .rangeslider--horizontal {
-    height: 10px;
-    width: 100%;
-  }
-
-  .rangeslider--vertical {
-    width: 20px;
-    min-height: 150px;
-    max-height: 100%;
-  }
-
-  .rangeslider--disabled {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
-    opacity: 0.4;
-  }
-
-  .rangeslider__fill {
-    // background: #4bc67d;
-    position: absolute;
-  }
-
-  .rangeslider--horizontal .rangeslider__fill {
-    top: 0;
-    height: 100%;
-  }
-
-  .rangeslider--vertical .rangeslider__fill {
-    bottom: 0;
-    width: 100%;
-  }
-
-  .rangeslider__handle {
-    background: white;
-    border: 6px solid #4bc67d;
-    cursor: pointer;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-
-    &.js-low {
-      border-color: #4bc67d;
-    }
-
-    &.js-med {
-      border-color: #f1c40f;
-    }
-
-    &.js-high {
-      border-color: #b94a48;
-    }
-  }
-
-  .rangeslider__handle:after {
-    content: "";
-    display: block;
-    width: 18px;
-    height: 18px;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-  }
-
-  .rangeslider__handle:active {}
-
-  .rangeslider--horizontal .rangeslider__handle {
-    top: -20px;
-    touch-action: pan-y;
-    -ms-touch-action: pan-y;
-  }
-
-  .rangeslider--vertical .rangeslider__handle {
-    left: -10px;
-    touch-action: pan-x;
-    -ms-touch-action: pan-x;
-  }
-
-  input[type="range"]:focus+.rangeslider .rangeslider__handle {
-    -moz-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
-    -webkit-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
-    box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
   }
 }
 </style>
