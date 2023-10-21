@@ -9,7 +9,7 @@ from db_functions.rating_funcs import (
 class Rating(BaseModel):
     login: str
     stars: int
-    recipe_id: list[str]
+    recipe_id: str
 
 router = APIRouter()
 
