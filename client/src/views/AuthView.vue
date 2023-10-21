@@ -14,9 +14,9 @@
             <input name="password" type="password" v-model="pass_auth">
           </div>
           <div class="btn" @click="go_auth()">Войти</div>
-          <div v-show="error_auth">{{ error_msg }}</div>
+          <div class="error__message" v-show="error_auth">{{ error_msg }}</div>
         </div>
-        <hr>
+        <div class="vertical-line"></div>
         <div class="registration authWrap">
           <img class="cheif" src="./../img/cheif.png" alt="">
           <div class="registration__title">
@@ -43,8 +43,8 @@
           <div class="btn" @click="go_reg()">
             Зарегистрироваться
           </div>
-          <div v-show="error_reg">{{ error_msg }}</div>
         </div>
+        <div class="error__message" v-show="error_reg">{{ error_msg }}</div>
       </div>
     </div>
   </section>
@@ -106,19 +106,28 @@ export default{
 }
 </script>
 <style lang="scss">
-  .woman{
-    z-index: 0;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
+.error__message{
+  height: 50px;
+  z-index: 1;
+  font-family: Montserrat;
+  font-weight: 800;
+  font-size: 23px;
+  color: red;
+}
 
-  .cheif{
-    z-index: 0;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
+.woman{
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.cheif{
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 .Auth {
   background-color: #FFF;
   padding-top: 150px;
@@ -136,15 +145,16 @@ export default{
     flex-direction: row;
     justify-content: space-around;
     //padding-left: 280px;
-    align-items: center;
+    align-items: flex-start;
   }
-  
+
   .auth {
     min-width: 380px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
 
     &__title {
       color: #000;
@@ -159,6 +169,7 @@ export default{
 
   .registration {
     max-width: 500px;
+    height: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -224,11 +235,12 @@ export default{
     z-index: 1;
   }
 
-  hr {
-    transform: rotate(90deg);
-    height: 3px;
-    background: #D8D8D8;
-    width: 480px;
+  .vertical-line {
+    border: 2px solid grey;
+    width: 1px;
+    height: 500px;
+    float: left;
+    z-index: 1;
   }
 }
 </style>
