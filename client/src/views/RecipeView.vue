@@ -4,72 +4,28 @@
         <div class="recipe">
                 <div class="recipe__title">
                     <div class="recipe__title-name">
-                        <span>Лазанья</span>
+                        <span>{{  recipe.title }}</span>
                     </div>
-                    <div class="recipe__title-rating" data-total-value="4">
-                        <div class="rating--item" data-item-value="5">&#9733;</div>
-                        <div class="rating--item" data-item-value="4">&#9733;</div>
-                        <div class="rating--item" data-item-value="3">&#9733;</div>
-                        <div class="rating--item" data-item-value="2">&#9733;</div>
-                        <div class="rating--item" data-item-value="1">&#9733;</div>
+                    <div class="recipe__title-rating">
+                        <div class="rating--item" v-for="star in recipe_star" :key="star.id">&#9733;</div>
                     </div>
                     <div class="recipe__title-time">
                         <img src="./../img/recipe_clock.png" alt="">
-                        <span>~20:00</span>
+                        <span>~{{  recipe.cooking_time }} мин</span>
                     </div>
                 </div>
                 <div class="recipe__content">
                     <div class="recipe__content-info">
                         <div class="recipe__content-image">
-                            <img src="./../img/recipe_lasagna.jpg" alt="">
+                            <img :src="img_for_recipe(recipe.picture_url)" alt="">
                         </div>
                         <div class="recipe__composition">
-                            <span>Состав:</span>
+                            <span>Ингредиенты :</span>
                             <div class="recipe__dishes">
-                                <div class="dish">
-                                    <div>Фарш мясной</div>
+                                <div class="dish" v-for="item in recipe.ingredients" :key="item.id">
+                                    <div>{{ item.name }}</div>
                                     <div></div>
-                                    <div>800г</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Помидоры</div>
-                                    <div></div>
-                                    <div>2шт.</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Лук</div>
-                                    <div></div>
-                                    <div>2шт.</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Листья лазаньи</div>
-                                    <div></div>
-                                    <div>10шт.</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Чеснок</div>
-                                    <div></div>
-                                    <div>2шт.</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Томатная паста</div>
-                                    <div></div>
-                                    <div>2 ст.л</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Твёрдый сыр</div>
-                                    <div></div>
-                                    <div>100г</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Растительное масло</div>
-                                    <div></div>
-                                    <div>1ст.л</div>
-                                </div>
-                                <div class="dish">
-                                    <div>Соль</div>
-                                    <div></div>
-                                    <div>0.5гр</div>
+                                    <div>{{ output_count(item) }}</div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +34,7 @@
                         <div class="recipe__description-null"></div>
                         <div class="recipe__description-text">
                             <span>Описание:</span>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsam vero ex aliquid dicta eligendi dolorem quam nesciunt, sequi illum, maiores porro doloremque. Facere, dolorem! Expedita tempore doloribus saepe quaerat?
+                            {{  recipe.description }}
                         </div>
                     </div>
                 </div>
@@ -103,10 +59,45 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 import HeaderComp from '../components/HeaderComp.vue';
 export default {
   components: {
     HeaderComp
+  },
+  data(){
+    return{
+        recipe: {},
+        recipe_star: 0
+    }
+  },
+  async created() {
+    await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
+      .then((response) => {
+        if (response.status == 200) {
+            console.log(response.data)
+            this.recipe = response.data
+            this.recipe_star = this.recipe["number of servings"]
+        }
+      })
+  },
+  methods:{
+    img_for_recipe(picture_url) {
+        if (picture_url) {
+            let name_picture = picture_url.split("/")[4];
+            return "http://127.0.0.1:8000/pics/" + name_picture;
+        } else {
+            return "";
+        }
+    },
+    output_count(item){
+        if (item.count == 0){
+            return item.unit
+        } else {
+            return item.count + item.unit
+        }
+    }
   }
 }
 </script>
@@ -161,7 +152,7 @@ export default {
 
         .rating--item{
             font-size: 25px;
-            color: #dcdcdc;
+            color: #FFC700;
             transition: .2s;
         }
 

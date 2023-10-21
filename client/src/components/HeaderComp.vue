@@ -3,9 +3,7 @@
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
-          <a href="/">
-            <img src="./../img/mainUmomLogo.png"/>
-          </a>
+          <img src="./../img/mainUmomLogo.png" @click="go_home()">
         </div>
         <div class="header__nav">
           <a href="" class="header__nav--link">Главная</a>
@@ -13,7 +11,7 @@
           <a href="" class="header__nav--link">Съедено</a>
           <a href="" class="header__nav--link">Избранное</a>
         </div>
-        <div class="header__info header__nav--link" v-if="auth">
+        <div class="header__info header__nav--link" v-if="auth" @click="go_exit()">
           Выход
         </div>
         <div class="header__info header__nav--link" v-else @click="go_auth">
@@ -35,6 +33,20 @@ export default {
   methods: {
     go_auth() {
       router.push('/auth')
+    },
+    go_exit(){
+      this.auth = false
+      localStorage.setItem('auth_status', "false")
+    },
+    go_home(){
+      router.push('/')
+    }
+  },
+  async mounted(){
+    if (localStorage.getItem('auth_status') == "true"){
+      this.auth = true
+    } else {
+      this.auth = false
     }
   }
 }
