@@ -9,6 +9,7 @@ from db_functions.recipes_functions import (
 )
 
 class QuerySchema(BaseModel):
+    login: str
     query: str
     desirable_ingredients: list[str]
     excluded_ingredients: list[str]
@@ -30,10 +31,11 @@ async def get_recipes_with_query(query: QuerySchema):
     query_list.append(
         {"ingredients.name": {"$nin": query.excluded_ingredients}}
     )
-    query_list.append(
-        {"description": {"$regex": query.query, "$options": "i"}}
-    )
-    recipes = get_recipes_by_query(query_list)
+    if query.query!="":
+        query_list.append(
+            {"description": {"$regex": query.query, "$options": "i"}}
+        )
+    recipes = get_recipes_by_query(query_list, query.login)
     return recipes
 
 @router.get("/recipes", tags=["recipes"])
