@@ -68,17 +68,22 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #fff;
-
+  
   &__view{
     display: flex;
     align-items: center;
-
+    height: 444px;
+    
     & img{
       height: 444px;
+      position: absolute;
+      z-index: 0;
+      transform: translateX(-200px);
     }
   }
-
+  
   input {
+    z-index: 1;
     width: 900px;
     border-radius: 13px;
     border: 4px solid #FF8139;
@@ -106,6 +111,7 @@ export default {
     background: #FFF;
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
     padding: 23px;
+    transform: translateY(66px);
 
     &--btn {
       margin-left: 360px;

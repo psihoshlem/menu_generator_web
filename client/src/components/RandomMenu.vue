@@ -74,7 +74,6 @@ export default {
   // width: 95%;
 }
 
-
 .receptions {
   // display: none;
   background-color: #fff;
@@ -83,7 +82,6 @@ export default {
     gap: 30px;
     justify-content: center;
     flex-flow: column wrap;
-    
   }
   
   &__title {
@@ -97,17 +95,27 @@ export default {
     font-weight: 700;
     line-height: normal;
   }
-
+  
   &__products {
     display: flex;
     flex-direction: row;
     margin-top: 55px;
     // column: gap 38px;
-
+    
     .product{
       width: 30%;
       height: 450px;
       margin-bottom: 30px;
+    }
+    @media screen and (max-width: 1650px){
+      .product{
+        width: 34%;
+      }
+    }
+    @media screen and (max-width: 1450px){
+      .product{
+        width: 50%;
+      }
     }
   }
 }
