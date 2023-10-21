@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
-          UmomБлюдо
+          <img src="./../img/mainUmomLogo.png"/>
         </div>
         <div class="header__nav">
           <a href="" class="header__nav--link">Главная</a>
@@ -45,11 +45,13 @@ export default {
 }
 
 .header {
+  background-color: #fff;
   &__block {
-    margin-top: 22px;
+    padding-top: 22px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__nav {

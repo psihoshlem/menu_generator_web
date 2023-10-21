@@ -2,17 +2,22 @@
   <section class="recomendation">
     <div class="inner">
       <div class="recomendation__title">
-        Хотите чего то нового?
-      </div>
-      <div class="recomendation__desc">
-        Посмотрите что приготовила для вас наша <span>нейросеть</span>:
+        <img src="./../img/neuro_want_new.png" alt="">
+        <div class="recomendation__title-text">
+          <span class="recomendation__title-span1">–– Чего-то необычного?!</span>
+          <span class="recomendation__title-span2">–– А вы когда нибудь пробовали...</span>
+        </div>
       </div>
       <div class="recomendation__card" v-for="item in recipe_neuro"
-        :key="item.id">
-        <div class="card__title">
-          {{ item.name }}
-        </div>
-        <div class="card__block">
+      :key="item.id">
+      <div class="card__title">
+        <img src="./../img/neuro-line.png" alt="">
+        {{ item.name }}
+      </div>
+      <div class="recomendation__desc">
+        (🧠 Приготовлено <span>нейросетью</span>)
+      </div>
+      <div class="card__block">
           <img src="../img/burger.png" alt="" class="card__img">
           <div class="card__desc">
             <span class="card__desc--time">
@@ -52,9 +57,8 @@ export default {
 
 .recomendation {
 
-  background-color: #000;
   color: #fff;
-  margin-top: 137px;
+  // margin-top: 137px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,13 +67,45 @@ export default {
   // display: none;
 
   &__title {
-    text-align: center;
     color: #FFF;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px 0;
+
+    & img{
+      width: 534px;
+      height: 35px;
+      margin: 0 auto;
+      margin-bottom: 25px;
+    }
+
+    &-text{
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin: 0 auto;
+      width: 1000px;
+      display: flex;
+      flex-direction: column;
+
+    }
+    &-span1{
+      text-align: start;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 300;
+    }
+    &-span2{
+      text-align: end;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 300;
+    }
   }
 
   &__desc {
@@ -83,10 +119,10 @@ export default {
     line-height: normal;
 
     span {
-      color: #FF8139
+      text-decoration: underline;
+      color: #FF64E6;
     }
   }
-
   &__card {
     margin-top: 52px;
   }
@@ -99,14 +135,14 @@ export default {
 
   &__title {
     text-align: center;
-    color: #FFF;
+    color: linear-gradient(180deg, rgba(255,129,57,1) 0%, rgba(223,80,0,1) 100%);
     font-family: Montserrat;
-    font-size: 32px;
+    font-size: 48px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 800;
     line-height: normal;
+    color: rgba(255, 129, 57, 1);
   }
-
   &__block {
     display: flex;
     flex-direction: row;
@@ -117,6 +153,13 @@ export default {
     font-style: italic;
     font-weight: 400;
     line-height: normal;
+    background-color: #ffffff51;
+    border-radius: 25px;
+
+    & img{
+      top: 5px;
+      position: absolute;
+    }
   }
 
   &__desc {
@@ -125,4 +168,5 @@ export default {
     flex-direction: column;
   }
 }
+
 </style>

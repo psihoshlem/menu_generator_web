@@ -5,6 +5,7 @@
 </template>
 <style lang="scss">
 .footer {
+  background-color: #fff;
   padding: 34px;
   text-align: center;
   color: #989898;

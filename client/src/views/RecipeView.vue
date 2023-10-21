@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="recipe_view">
     <HeaderComp />
         <div class="recipe">
                 <div class="recipe__title">
@@ -94,6 +94,10 @@ export default {
 }
 </script>
 <style lang="scss">
+.recipe_view{
+  background-color: #fff;
+}
+
 .recipe{
     margin: 0 auto;
     max-width: 1600px;

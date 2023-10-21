@@ -12,7 +12,16 @@ export default {
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,300&display=swap');
-
+body{
+  background: url('./img/parallax.png');
+  background-repeat: repeat repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(5px);
+}
 /* Reset and base styles  */
 * {
 	padding: 0px;
