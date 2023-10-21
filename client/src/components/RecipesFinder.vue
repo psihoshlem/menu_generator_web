@@ -7,6 +7,7 @@
           <input type="text" class="search__input"
             placeholder="Давайте найдем что то вкусное" @focus="focused = true"
             v-model="value_input"
+            @input="test()"
           >
         </div>
         <span v-if="focused" class="modal"></span>
@@ -17,6 +18,18 @@
                 {{ item.name }}
               </span>
             </a>
+          </div>
+          <div>
+            включить продукты
+            <input v-model="input_add_product" v-on:keyup.enter="add_product(input_add_product)">
+            <button @click="add_product(input_add_product)">добавить</button>
+            добавлено: <span v-for="item in added_products" :key="item.id">{{ item }}</span>
+          </div>
+          <div>
+            исключить продукты
+            <input v-model="input_exclude_product" v-on:keyup.enter="exclude_product(input_exclude_product)">
+            <button @click="exclude_product(input_exclude_product)">исключить</button>
+            исключено: <span v-for="item in excluded_products" :key="item.id">{{ item }}</span>
           </div>
           <div class="search__time-block" @blur="focused = false">
             <div class="time__title">Параметры поиска</div>
@@ -40,13 +53,44 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
-  // props: ['onLogin'],
   data() {
     return {
       search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
-      value_input: ''
+      value_input: '',
+      input_add_product: '',
+      input_exclude_product: '',
+      added_products: [],
+      excluded_products: []
+    }
+  },
+  methods:{
+    add_product(input_add_product){
+      this.added_products.push(input_add_product)
+      this.input_add_product = ''
+    },
+    exclude_product(input_exclude_product){
+      this.excluded_products.push(input_exclude_product)
+      this.input_exclude_product = ''
+    },
+    test(){
+      // console.log(typeof(localStorage.getItem('login')))
+      // console.log(typeof(this.value_input))
+      // console.log(typeof(this.added_products))
+      if (localStorage.getItem('login')){
+        axios.post('http://localhost:8000/recipes', {
+          login: String(localStorage.getItem('login')),
+          query: this.value_input,
+          desirable_ingredients: this.added_products,
+          excluded_ingredients: this.excluded_products
+        })
+        .then((response) => {
+          console.log(response)
+        })
+      }
     }
   }
 }

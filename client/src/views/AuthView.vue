@@ -76,6 +76,7 @@ export default{
         .then((response) => {
           if (response.data == true) {
             localStorage.setItem('auth_status', response.data)
+            localStorage.setItem('login', this.log_reg)
             router.push('/')
           } else {
             this.error_reg = true
@@ -95,6 +96,7 @@ export default{
       .then((response) => {
         if (response.data == true) {
           localStorage.setItem('auth_status', response.data)
+          localStorage.setItem('login', this.log_auth)
           router.push('/')
         } else {
           this.error_auth = true

@@ -73,6 +73,7 @@ export default {
     }
   },
   async created() {
+    document.body.scrollTop = 0
     await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
       .then((response) => {
         if (response.status == 200) {
