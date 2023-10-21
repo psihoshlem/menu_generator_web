@@ -1,33 +1,39 @@
 <template>
-  <div class="inner">
-    <div class="search">
-      <input type="text" class="search__input"
-        placeholder="Давайте найдем что то вкусное" @focus="focused = true"
-        v-model="value_input">
-      <div class="search__block" v-if="focused" @focus="focused = true">
-        <div class="search__products">
-          <a href="" v-for="item in search_product" :key="item.id">
-            <span class="product">
-              {{ item.name }}
-            </span>
-          </a>
+  <div class="finder">
+    <div class="inner">
+      <div class="search">
+        <div class="search__view">
+          <img src="./../img/main-man-logo.png" alt="">
+          <input type="text" class="search__input"
+            placeholder="Давайте найдем что то вкусное" @focus="focused = true"
+            v-model="value_input"
+          >
         </div>
-        <div class="search__time-block" @blur="focused = false">
-          <div class="time__title">Параметры поиска</div>
-          <div class="time__desc">Время готовки в минутах:</div>
-          <div class="time__slide slidecontainer">
-            <input type="range" name="participants" min="0" max="120" value="20">
-            <span class="rangeslider__tooltip" id="range-tooltip"></span>
+        <div class="search__block" v-if="focused" @focus="focused = true">
+          <div class="search__products">
+            <a href="" v-for="item in search_product" :key="item.id">
+              <span class="product">
+                {{ item.name }}
+              </span>
+            </a>
           </div>
-        </div>
-        <div class="search__grade">
-          Рейтинг
-          <div class="search__grade-block">
-            <label for="grade">Звезд</label>
-            <input type="number" max="5" value="0">
+          <div class="search__time-block" @blur="focused = false">
+            <div class="time__title">Параметры поиска</div>
+            <div class="time__desc">Время готовки в минутах:</div>
+            <div class="time__slide slidecontainer">
+              <input type="range" name="participants" min="0" max="120" value="20">
+              <span class="rangeslider__tooltip" id="range-tooltip"></span>
+            </div>
           </div>
+          <div class="search__grade">
+            Рейтинг
+            <div class="search__grade-block">
+              <label for="grade">Звезд</label>
+              <input type="number" max="5" value="0">
+            </div>
+          </div>
+          <div class="search__block--btn btn" @click="focused = false">Поиск</div>
         </div>
-        <div class="search__block--btn btn" @click="focused = false">Поиск</div>
       </div>
     </div>
   </div>
@@ -45,20 +51,34 @@ export default {
 }
 </script>
 <style lang="scss">
+.finder{
+  background-color: #FFF;
+}
+
 .inner {
   margin: 0 auto;
   max-width: 1600px;
   width: 95%;
+  
 }
 
 .search {
-  margin-top: 137px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
+
+  &__view{
+    display: flex;
+    align-items: center;
+
+    & img{
+      height: 444px;
+    }
+  }
 
   input {
-    width: 1000px;
+    width: 900px;
     border-radius: 13px;
     border: 3px solid #FF8139;
     background: #FFF;
@@ -66,7 +86,11 @@ export default {
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 21px;
-    position: relative;
+    font-family: Montserrat;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 24px;
+    // position: relative;
   }
 
   &__block {
@@ -182,6 +206,9 @@ export default {
         line-height: normal;
       }
     }
+  }
+
+  .search__block{
   }
 }
 

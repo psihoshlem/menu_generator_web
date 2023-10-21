@@ -60,11 +60,21 @@ export default {
 .inner {
   margin: 0 auto;
   max-width: 1600px;
-  width: 95%;
+  // width: 95%;
 }
+
 
 .receptions {
   // display: none;
+  background-color: #fff;
+  
+  &__products{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-flow: column wrap;
+    
+  }
 
   &__title {
     text-align: center;
@@ -81,7 +91,13 @@ export default {
     display: flex;
     flex-direction: row;
     margin-top: 55px;
-    column: gap 38px;
+    // column: gap 38px;
+
+    .product{
+      width: 30%;
+      height: 450px;
+      margin-bottom: 30px;
+    }
   }
 }
 </style>

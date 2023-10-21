@@ -31,8 +31,10 @@ export default {
 </script>
 <style lang="scss">
 .foodcard {
-  width: 584px;
-  height: 555px;
+  background-color: #fff;
+
+  max-width: 584px;
+  // max-height: 450px;
   background: url('../img/foodcard_czezar.jpg') no-repeat center center;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
@@ -42,6 +44,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 100px;
 
   .foodcard__title {
     display: flex;
@@ -50,6 +53,7 @@ export default {
     align-items: center;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 70%);
     border-radius: 25px 25px 0 0;
+    padding-bottom: 150px;
 
     &-name {
       margin-top: 34px;
@@ -86,7 +90,7 @@ export default {
     //   color: #FFC700;
     // }
   }
-
+  
   .foodcard__recipe {
     width: 100%;
     height: 181px;
@@ -96,6 +100,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    padding-bottom: 30px;
 
     .foodcard__recipe-time {
       display: flex;
