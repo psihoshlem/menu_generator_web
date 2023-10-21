@@ -13,7 +13,7 @@
     <div class="foodcard__recipe">
       <div class="foodcard__recipe-time">
         <img src="../img/foodcard_clock.png" alt="">
-        <span>~{{ recipe.cooking_time }}</span>
+        <span>~{{ recipe.cooking_time }} мин</span>
       </div>
       <div class="foodcard__recipe-composition">
         <span>Состав: {{ recipe.compound }}</span>
@@ -39,7 +39,8 @@ export default {
 <style lang="scss">
 .foodcard {
   background-color: #fff;
-  max-width: 584px;
+  min-width: 480px;
+  min-height: 485px;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -53,22 +54,24 @@ export default {
 
   .foodcard__title {
     display: flex;
+    height: 160px;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 70%);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
     border-radius: 25px 25px 0 0;
-    padding-bottom: 150px;
+    // padding-bottom: 150px;
 
     &-name {
-      margin-top: 34px;
-      font-size: 36px;
+      margin: 0 10px;
+      font-size: 30px;
       font-weight: 700;
     }
 
     .foodcard__title-rating {
       width: 180px;
-      margin-bottom: 34px;
+      // margin-bottom: 34px;
       display: inline-flex;
       flex-direction: row-reverse;
       justify-content: center;
@@ -101,7 +104,8 @@ export default {
     height: 181px;
     padding: 20px;
     backdrop-filter: blur(20px);
-    border-radius: 40px 40px 25px 25px;
+    background: rgba(0,0,0,0.2);
+    border-radius:0 0 25px 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -129,6 +133,11 @@ export default {
       align-items: center;
       font-size: 16px;
       font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
   }
 }
