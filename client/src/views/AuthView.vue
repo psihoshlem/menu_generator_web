@@ -1,8 +1,8 @@
 <template>
   <section class="Auth">
     <div class="inner">
-      <img src="./../img/woman.png" alt="">
-      <img src="./../img/cheif.png" alt="">
+      <!-- <img src="./../img/woman.png" alt="">
+      <img src="./../img/cheif.png" alt=""> -->
       <div class="Auth__block">
         <div class="auth authWrap">
           <div class="auth__title">Вход</div>
@@ -49,9 +49,7 @@
   padding-top: 150px;
   height: 100%;
   
-  .inner{
-    
-  }
+
 
   & img{
     position: absolute;

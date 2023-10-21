@@ -27,7 +27,6 @@ body{
   background-attachment: fixed;
   margin-left: auto;
   margin-right: auto;
-  backdrop-filter: blur(5px);
 }
 
 body,
