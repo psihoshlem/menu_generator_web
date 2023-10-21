@@ -1,10 +1,7 @@
-from pymongo import MongoClient
 from bson.objectid import ObjectId
+from db_functions import db
 
-client = MongoClient('mongodb://db:27017')
-# client = MongoClient('localhost', 27017)
 
-db = client.umom_dishes
 collection = db.recipes
 
 def add_recipe(recipe):
