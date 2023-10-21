@@ -26,6 +26,18 @@ def get_recipe_by_id(id: str):
     result["_id"] = str(result["_id"])
     return result
 
+def get_recipes_by_query(query):
+    recipes_obj = collection.find(
+        {"$and": query}, 
+        {"title":1, "cooking_time": 1, "description": 1, "picture_url": 1}
+    )
+    recipes = []
+    for item in recipes_obj:
+        item["_id"] = str(item["_id"])
+        recipes.append(item) 
+    return recipes
+
+
 if __name__=="__main__":
     collection.delete_many({})
 
