@@ -1,8 +1,8 @@
 <template>
-  <div class="foodcard" style="background: url('../img/{{ recipe.img }}'))">
+  <div class="foodcard" style="background: url('{{ recipe.picture_url }}'))">
     <div class="foodcard__title">
       <div class="foodcard__title-name">
-        <span>{{ recipe.name }}</span>
+        <span>{{ recipe.title }}</span>
       </div>
       <div class="foodcard__title-rating">
         <div class="rating--item" v-for="star in recipe.grade" :key="star.id">
@@ -13,7 +13,7 @@
     <div class="foodcard__recipe">
       <div class="foodcard__recipe-time">
         <img src="../img/foodcard_clock.png" alt="">
-        <span>~{{ recipe.time }}</span>
+        <span>~{{ recipe.cooking_time }}</span>
       </div>
       <div class="foodcard__recipe-composition">
         <span>Состав: {{ recipe.compound }}</span>
