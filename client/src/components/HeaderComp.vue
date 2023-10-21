@@ -16,7 +16,6 @@
         </div>
         <div class="header__info header__nav--link" v-else @click="go_auth">
           Вход / Регестрация
-          <!-- <router-link to="/auth">Вход / Рsегестрация</router-link> -->
         </div>
       </div>
     </div>
