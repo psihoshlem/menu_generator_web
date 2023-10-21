@@ -1,5 +1,9 @@
 version: '3'
 services:
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
   server:
     build:
       context: ./server
@@ -7,7 +11,7 @@ services:
     ports:
       - "8000:8000"
     links:
-      - mongo
+      - db
   # client:
   #   build:
   #     context: ./client
@@ -16,7 +20,3 @@ services:
   #     - "8080:8080"
   #   links:
   #     - server
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
