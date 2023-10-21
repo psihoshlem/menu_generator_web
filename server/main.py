@@ -2,6 +2,8 @@ from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 
+import create_examples
+from routers import recipes_router
 
 app = FastAPI()
 app.add_middleware(
@@ -11,6 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(recipes_router.router)
 
 @app.get("/")
 async def health_check():
