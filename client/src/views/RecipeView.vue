@@ -186,7 +186,7 @@ export default {
         }
 
         .recipe__composition{
-            height: 260px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -196,8 +196,7 @@ export default {
             }
 
             .recipe__dishes{
-                width: 540px;
-                // height: 200px;
+                width: 850px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
@@ -206,7 +205,7 @@ export default {
             .dish {
                 font-size: 16px;
                 font-weight: 400;
-                width: 250px;
+                width: 400px;
                 height: 20px;
                 display: flex;
                 justify-content: space-between;
@@ -224,7 +223,7 @@ export default {
         .recipe__description{
             margin: 0 auto;
             width: 1300px;
-            height: 300px;
+            height: 400px;
             background-color: #18274B1F;
             border-radius: 25px;
             display: flex;
@@ -232,42 +231,56 @@ export default {
 
 
             &-null{
-                width: 1150px;
+                width: 500px;
             }
 
             &-text{
+                width: 800px;
                 margin-top: 45px;
                 margin-right: 62px;
+                margin-left: 20px;
+                font-size: 20px;
+                font-weight: 500;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                span{
+                    font-weight: 800;
+                    font-size: 25px;
+                }
             }
 
             @media screen and (max-width: 1600px){
                 &-null{
-                    width: 1350px;
+                    width: 500px;
                 }
             }
-            @media screen and (max-width: 1500px){
+            @media screen and (max-width: 1550px){
                 &-null{
-                    width: 1560px;
+                    width: 550px;
                 }
             }
-            @media screen and (max-width: 1400px){
+            @media screen and (max-width: 1450px){
                 &-null{
-                    width: 1750px;
+                    width: 650px;
                 }
             }
-            @media screen and (max-width: 1300px){
+            @media screen and (max-width: 1350px){
                 &-null{
-                    width: 1850px;
+                    width: 750px;
                 }
             }
         }
 
         @media screen and (max-width: 1300px){
             .recipe__content-image{
-                width: 300px;
+                width: 400px;
+                height: auto;
             }
             .recipe__content-image img{
-                width: 300px;
+                width: 400px;
+                height: auto;
             }
 
         }
@@ -294,20 +307,24 @@ export default {
     row-gap: 25px;
 }
 .step{
+    margin: 50px auto;
+    width: 1200px;
+    // height: 272px;
     display: flex;
     flex-direction: row;
-    column-gap: 24px;
+    gap: 24px;
     position: relative;
     border-radius: 40px;
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12);
+    background:#18274B1F;
+    // box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12);
     backdrop-filter: blur(20px);
     padding: 40px;
     &__img{
         
         img{
-            width: 100%;
+            max-width: 350px;
             border-radius:20px;
+            transform: translateZ();
         }
     }
     &__desc{
@@ -315,7 +332,7 @@ export default {
         flex-direction: column;
         margin-top: 15px; 
         &--counter{
-            color: #3F3F3F;
+            color: #000;
             font-family: Montserrat;
             font-size: 40px;
             font-style: italic;
@@ -323,12 +340,12 @@ export default {
             line-height: normal;
         }
         &--instruct{
+            color: #3F3F3F;
             margin-top: 30px;
-            color: #000;
             font-family: Montserrat;
             font-size: 20px;
             font-style: italic;
-            font-weight: 400;
+            font-weight: 800;
             line-height: normal;
         }
     }

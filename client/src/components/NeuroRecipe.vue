@@ -18,17 +18,18 @@
         (🧠 Приготовлено <span>нейросетью</span>)
       </div>
       <div class="card__block">
-          <img src="../img/neuro-soup.png" alt="" class="card__img">
+          <img src="../img/neuro-soup.png" alt="" class="soup">
           <div class="card__desc">
-            <span class="card__desc--time">
-              ~{{ item.time }}
+            <span class="card__desc-time">
+              <img src="./../img/foodcard_clock.png" alt="">
+              ~{{ item.time }} мин
             </span>
-            Состав
-            <span class="card__desc--sostav">
+            <span class="card__desc-sostav">
+              <span>Состав</span>
               {{ item.compound }}
             </span>
-            Описание
-            <p class="card__desc--history">
+            <p class="card__desc-history">
+              <span>Описание</span>
               {{ item.description }}
             </p>
           </div>
@@ -156,7 +157,7 @@ export default {
     font-weight: 400;
     line-height: normal;
     
-    & img{
+    .soup{
       position: absolute;
       transform: translateY(-40px);
     }
@@ -173,6 +174,32 @@ export default {
     display: flex;
     row-gap: 24px;
     flex-direction: column;
+
+    &-time{
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+
+    &-sostav{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      span{
+        font-weight: 800;
+      }
+    }
+    
+    &-history{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      
+      span{
+        font-weight: 800;
+      }
+    }
   }
 }
 
