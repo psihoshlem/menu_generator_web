@@ -6,7 +6,7 @@
 <style lang="scss">
 .footer {
   background-color: #fff;
-  padding: 34px;
+  padding: 100px 0 50px 0;
   text-align: center;
   color: #989898;
   font-family: Montserrat;

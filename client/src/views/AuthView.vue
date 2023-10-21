@@ -1,6 +1,8 @@
 <template>
   <section class="Auth">
     <div class="inner">
+      <img src="./../img/woman.png" alt="">
+      <img src="./../img/cheif.png" alt="">
       <div class="Auth__block">
         <div class="auth authWrap">
           <div class="auth__title">Вход</div>
@@ -43,8 +45,19 @@
 </template>
 <style lang="scss">
 .Auth {
-  margin-top: 150px;
+  background-color: #FFF;
+  padding-top: 150px;
+  height: 100%;
+  
+  .inner{
+    
+  }
 
+  & img{
+    position: absolute;
+    z-index: 0;
+  }
+  
   &__block {
     display: flex;
     flex-direction: row;
@@ -52,13 +65,15 @@
     //padding-left: 280px;
     align-items: center;
   }
-
+  
   .auth {
+    z-index: 1;
     min-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    
     &__title {
       color: #000;
       font-family: Montserrat;

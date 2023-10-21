@@ -80,7 +80,7 @@ export default {
   input {
     width: 900px;
     border-radius: 13px;
-    border: 3px solid #FF8139;
+    border: 4px solid #FF8139;
     background: #FFF;
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
     padding-top: 15px;

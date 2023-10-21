@@ -33,9 +33,6 @@ export default {
   methods: {
     go_auth() {
       router.push('/auth')
-    },
-    go_home(){
-      router.push('/')
     }
   }
 }
