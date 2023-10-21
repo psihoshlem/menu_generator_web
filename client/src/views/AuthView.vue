@@ -80,7 +80,7 @@
     //padding-left: 280px;
     align-items: center;
   }
-  
+
   .auth {
     min-width: 380px;
     display: flex;
