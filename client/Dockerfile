@@ -10,6 +10,8 @@ RUN npm install
 
 COPY . .
 
+RUN npm install sass-loader node-sass --save-dev
+
 RUN npm run build
 
 EXPOSE 8080
