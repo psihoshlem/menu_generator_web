@@ -5,12 +5,12 @@
         <div class="search__view">
           <img src="./../img/main-man-logo.png" alt="">
           <input type="text" class="search__input"
-            placeholder="Давайте найдем что то вкусное" @focus="focused = true"
+            placeholder="Давайте найдем что то вкусное" @focus="openModal"
             v-model="value_input"
           >
         </div>
-        <span v-if="focused" class="modal"></span>
-        <div class="search__block" v-if="focused" @focus="focused = true">
+        <span v-if="focused" class="modal" @click="closeModal"></span>
+        <div class="search__block" v-if="focused" @click.stop>
           <div class="search__products">
             <a href="" v-for="item in search_product" :key="item.id">
               <span class="product">
@@ -81,6 +81,19 @@ export default {
       search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
       value_input: ''
+    }
+  },
+  methods: {
+    openModal() {
+      this.focused = true;
+      // Добавьте обработчик события для закрытия модального окна при клике вне его
+      window.addEventListener('click', this.closeModal);
+    },
+    closeModal(event) {
+      if (!this.$el.contains(event.target)) {
+        this.focused = false;
+        window.removeEventListener('click', this.closeModal);
+      }
     }
   }
 }
