@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="Auth__block">
         <div class="auth authWrap">
-          <img src="./../img/woman.png" alt="">
+          <img class="woman" src="./../img/woman.png" alt="">
           <div class="auth__title">Вход</div>
           <div class="auth__login field">
             <label for="login">Логин</label>
@@ -18,7 +18,7 @@
         </div>
         <hr>
         <div class="registration authWrap">
-          <img src="./../img/cheif.png" alt="">
+          <img class="cheif" src="./../img/cheif.png" alt="">
           <div class="registration__title">
             Регистрация
           </div>
@@ -106,6 +106,19 @@ export default{
 }
 </script>
 <style lang="scss">
+  .woman{
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .cheif{
+    z-index: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 .Auth {
   background-color: #FFF;
   padding-top: 150px;
@@ -121,7 +134,7 @@ export default{
   &__block {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     //padding-left: 280px;
     align-items: center;
   }
@@ -131,13 +144,7 @@ export default{
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    & .authWrap{
-
-      & img{
-        position: absolute;
-      }
-    }
+    justify-content: center;
 
     &__title {
       color: #000;
@@ -146,15 +153,15 @@ export default{
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+      z-index: 1;
     }
   }
 
   .registration {
-    width: 500px;
-
-    & .authWrap{
-      position: absolute;
-    }
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     &__title {
       text-align: center;
@@ -164,33 +171,37 @@ export default{
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+      z-index: 1;
     }
   }
 
+  label {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  input {
+    width: 350px;
+    padding: 12px;
+    border-radius: 20px;
+    border: 3px solid #FF8139;
+    background: #FFF;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
+
+  }
   .field {
+    z-index: 1;
     display: flex;
     flex-direction: column;
     row-gap: 14px;
-    width: 100%;
-
-    label {
-      color: #000;
-      font-family: Montserrat;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
-
-    input {
-      padding: 12px;
-      border-radius: 20px;
-      border: 3px solid #FF8139;
-      background: #FFF;
-      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
-    }
+    // width: 100%;
   }
 
+  
   .authWrap {
     display: flex;
     flex-direction: column;
@@ -210,6 +221,7 @@ export default{
     border-radius: 20px;
     background: #FF8139;
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
   }
 
   hr {
