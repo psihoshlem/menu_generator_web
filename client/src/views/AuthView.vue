@@ -14,7 +14,7 @@
             <input name="password" type="password" v-model="pass_auth">
           </div>
           <div class="btn" @click="go_auth()">Войти</div>
-          <div v-if="error_auth">{{ error_msg }}</div>
+          <div v-show="error_auth">{{ error_msg }}</div>
         </div>
         <hr>
         <div class="registration authWrap">
@@ -43,7 +43,7 @@
           <div class="btn" @click="go_reg()">
             Зарегистрироваться
           </div>
-          <div v-if="error_reg">{{ error_msg }}</div>
+          <div v-show="error_reg">{{ error_msg }}</div>
         </div>
       </div>
     </div>

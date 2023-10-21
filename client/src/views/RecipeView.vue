@@ -42,13 +42,13 @@
                   <div class="cook__title">
                       Способы приготовления
                   </div>
-                  <div class="steps">
+                  <div class="steps" v-for="(item, index) in recipe.recipe_instructions" :key="index">
                       <div class="step">
-                          <div class="step__img"><img src="./../img/steps_image1.png" alt=""></div>
+                          <div class="step__img"><img :src="img_for_recipe(item.img)" alt=""></div>
                           <div class="step__desc">
-                              <div class="step__desc--counter">Шаг 1</div>
+                              <div class="step__desc--counter">Шаг {{index + 1}}</div>
                               <div class="step__desc--instruct">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sequi deleniti nobis praesentium, provident harum dolorem in perferendis pariatur quod ratione optio corporis ut porro maxime quos, itaque, vero omnis.
+                                {{ item.text }}
                               </div>
                               <div class="bg"></div>
                           </div>
@@ -76,7 +76,6 @@ export default {
     await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
       .then((response) => {
         if (response.status == 200) {
-            console.log(response.data)
             this.recipe = response.data
             this.recipe_star = this.recipe["number of servings"]
         }
