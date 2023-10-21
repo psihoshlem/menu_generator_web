@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <HeaderComp />
         <div class="recipe">
                 <div class="recipe__title">
                     <div class="recipe__title-name">
@@ -85,6 +86,12 @@
     </div>
 </template>
 <script>
+import HeaderComp from '../components/HeaderComp.vue';
+export default {
+  components: {
+    HeaderComp
+  }
+}
 </script>
 <style lang="scss">
 .recipe{
