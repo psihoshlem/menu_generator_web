@@ -9,6 +9,7 @@
           <a href="" class="header__nav--link" @click="go_home()">Главная</a>
           <a href="" class="header__nav--link">Все рецепты</a>
           <a href="" class="header__nav--link">Съедено</a>
+          <a href="" class="header__nav--link" @click="go_seach()">Поиск</a>
           <a href="" class="header__nav--link">Избранное</a>
         </div>
         <div class="header__info header__nav--link" v-if="auth" @click="go_exit()">
@@ -40,6 +41,9 @@ export default {
     },
     go_home(){
       router.push('/')
+    },
+    go_seach(){
+      router.push('/search')
     }
   },
   async mounted(){

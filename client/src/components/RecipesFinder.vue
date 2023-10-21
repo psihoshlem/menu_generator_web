@@ -5,9 +5,11 @@
         <div class="search__view">
           <img src="./../img/main-man-logo.png" alt="">
           <input type="text" class="search__input"
-            placeholder="Давайте найдем что то вкусное" @focus="focused = true"
+            placeholder="Давайте найдем что то вкусное"
+            @focus="focused = true"
             v-model="value_input"
-            @input="test()"
+            @input="input_writing()
+            "
           >
         </div>
         <span v-if="focused" class="modal"></span>
@@ -46,7 +48,7 @@
               <input type="number" max="5" value="0">
             </div>
           </div>
-          <div class="search__block--btn btn" @click="focused = false">Поиск</div>
+          <div class="search__block--btn btn" @click="go_to_search()">Поиск</div>
         </div>
       </div>
     </div>
@@ -64,7 +66,8 @@ export default {
       input_add_product: '',
       input_exclude_product: '',
       added_products: [],
-      excluded_products: []
+      excluded_products: [],
+      finish_search: []
     }
   },
   methods:{
@@ -76,10 +79,7 @@ export default {
       this.excluded_products.push(input_exclude_product)
       this.input_exclude_product = ''
     },
-    test(){
-      // console.log(typeof(localStorage.getItem('login')))
-      // console.log(typeof(this.value_input))
-      // console.log(typeof(this.added_products))
+    input_writing(){
       if (localStorage.getItem('login')){
         axios.post('http://localhost:8000/recipes', {
           login: String(localStorage.getItem('login')),
@@ -88,9 +88,14 @@ export default {
           excluded_ingredients: this.excluded_products
         })
         .then((response) => {
-          console.log(response)
+          this.finish_search = response.data
         })
       }
+    },
+    go_to_search(){
+      this.focused = false
+      const str_output = JSON.stringify({login: String(localStorage.getItem('login')), query: this.value_input, desirable_ingredients: this.added_products, excluded_ingredients: this.excluded_products})
+      this.$router.push({ path: '/search', query:{output_data: str_output}});
     }
   }
 }
