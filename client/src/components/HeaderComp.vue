@@ -15,7 +15,7 @@
           Выход
         </div>
         <div class="header__info header__nav--link" v-else @click="go_auth">
-          Вход / Регестрация
+          Вход / Регистрация
         </div>
       </div>
     </div>
@@ -60,6 +60,8 @@ export default {
 
 .header {
   background-color: #fff;
+
+
   &__block {
     padding-top: 22px;
     display: flex;

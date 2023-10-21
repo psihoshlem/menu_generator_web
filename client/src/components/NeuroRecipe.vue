@@ -56,6 +56,8 @@ export default {
 }
 
 .recomendation {
+  backdrop-filter: blur(5px);
+
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,0) 99%, rgba(255,255,255,1) 100%);  color: #fff;
   // margin-top: 137px;
   display: flex;
@@ -134,7 +136,7 @@ export default {
   
   &__title {
     text-align: center;
-    color: linear-gradient(180deg, rgba(255,129,57,1) 0%, rgba(223,80,0,1) 100%);
+    // color: linear-gradient(180deg, rgba(255,129,57,1) 0%, rgba(223,80,0,1) 100%);
     font-family: Montserrat;
     font-size: 48px;
     font-style: normal;
@@ -156,7 +158,7 @@ export default {
     
     & img{
       position: absolute;
-      transform: translateY(100px);
+      transform: translateY(-40px);
     }
   }
   

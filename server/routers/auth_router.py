@@ -1,11 +1,9 @@
 from pydantic import BaseModel
 from fastapi import APIRouter
-from fastapi.responses import FileResponse
 
 from db_functions.users_functions import (
     create_user,
     is_data_valid
-
 )
 
 class UserSchema(BaseModel):
