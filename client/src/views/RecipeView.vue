@@ -82,6 +82,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="cook">
+                  <div class="cook__title">
+                      Способы приготовления
+                  </div>
+                  <div class="steps">
+                      <div class="step">
+                          <div class="step__img"><img src="./../img/steps_image1.png" alt=""></div>
+                          <div class="step__desc">
+                              <div class="step__desc--counter">Шаг 1</div>
+                              <div class="step__desc--instruct">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sequi deleniti nobis praesentium, provident harum dolorem in perferendis pariatur quod ratione optio corporis ut porro maxime quos, itaque, vero omnis.
+                              </div>
+                              <div class="bg"></div>
+                          </div>
+                      </div>
+                  </div>
+            </div>
         </div>
     </div>
 </template>
@@ -265,5 +282,69 @@ export default {
 
         }
     }
+
+    .cook{
+    display: flex;
+    flex-direction: column;
+    margin-top: 68px;
+    &__title{
+        text-align: center;
+        color: #000;
+        font-family: Montserrat;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+.steps{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+.step{
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+    position: relative;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    &__img{
+        
+        img{
+            width: 100%;
+            border-radius:20px;
+        }
+    }
+    &__desc{
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px; 
+        &--counter{
+            color: #3F3F3F;
+            font-family: Montserrat;
+            font-size: 40px;
+            font-style: italic;
+            font-weight: 900;
+            line-height: normal;
+        }
+        &--instruct{
+            margin-top: 30px;
+            color: #000;
+            font-family: Montserrat;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+    .bg{
+        position: absolute;
+    }
+}
 }
 </style>

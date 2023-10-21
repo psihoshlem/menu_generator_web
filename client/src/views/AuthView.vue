@@ -1,10 +1,9 @@
 <template>
   <section class="Auth">
     <div class="inner">
-      <!-- <img src="./../img/woman.png" alt="">
-      <img src="./../img/cheif.png" alt=""> -->
       <div class="Auth__block">
         <div class="auth authWrap">
+          <img src="./../img/woman.png" alt="">
           <div class="auth__title">Вход</div>
           <div class="auth__login field">
             <label for="login">Логин</label>
@@ -18,25 +17,30 @@
         </div>
         <hr>
         <div class="registration authWrap">
-          <div class="registration__title">Регистрация</div>
+          <img src="./../img/cheif.png" alt="">
+          <div class="registration__title">
+            Регистрация
+          </div>
           <div class="registration__login field">
-            <label for="login">Логин</label>
+            <label for="login">
+              Логин
+            </label>
             <input name="login" type="text">
           </div>
           <div class="registration__password field">
-            <label for="password">Пароль</label>
+            <label for="password">
+              Пароль
+            </label>
             <input name="password" type="password">
           </div>
           <div class="registration__repeat field">
-            <label for="password_repeat">Логин</label>
+            <label for="password_repeat">
+              Повторите пароль
+            </label>
             <input name="password_repeat" type="text">
           </div>
-          <div class="registration__email field ">
-            <label for="mail">Email</label>
-            <input name="mail" type="mail">
-          </div>
           <div class="btn">
-            Регестрация
+            Зарегистрироваться
           </div>
         </div>
       </div>
@@ -47,15 +51,15 @@
 .Auth {
   background-color: #FFF;
   padding-top: 150px;
-  height: 100%;
-  
 
-
-  & img{
-    position: absolute;
-    z-index: 0;
+  input{
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
-  
+
   &__block {
     display: flex;
     flex-direction: row;
@@ -63,15 +67,20 @@
     //padding-left: 280px;
     align-items: center;
   }
-  
+
   .auth {
-    z-index: 1;
     min-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    
+    & .authWrap{
+
+      & img{
+        position: absolute;
+      }
+    }
+
     &__title {
       color: #000;
       font-family: Montserrat;
@@ -84,6 +93,10 @@
 
   .registration {
     width: 500px;
+
+    & .authWrap{
+      position: absolute;
+    }
 
     &__title {
       text-align: center;

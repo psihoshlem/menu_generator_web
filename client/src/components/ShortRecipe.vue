@@ -45,6 +45,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 100px;
+  cursor: pointer;
 
   .foodcard__title {
     display: flex;

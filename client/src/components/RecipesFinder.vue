@@ -43,7 +43,7 @@ export default {
   // props: ['onLogin'],
   data() {
     return {
-      search_product: [{ name: "Пицца говняшка" }, { name: "Пицца вкусняшка" }],
+      search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
       value_input: ''
     }
