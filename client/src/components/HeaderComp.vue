@@ -6,7 +6,7 @@
           <img src="./../img/mainUmomLogo.png" @click="go_home()">
         </div>
         <div class="header__nav">
-          <a href="" class="header__nav--link">Главная</a>
+          <a href="" class="header__nav--link" @click="go_home()">Главная</a>
           <a href="" class="header__nav--link">Все рецепты</a>
           <a href="" class="header__nav--link">Съедено</a>
           <a href="" class="header__nav--link">Избранное</a>
