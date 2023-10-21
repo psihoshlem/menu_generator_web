@@ -12,7 +12,9 @@ def add_recipe(recipe):
     return result.inserted_id
 
 def get_recipes_from_db():
-    recipes_obj = collection.find({}, {"title":1, "cooking_time": 1, "description": 1}).limit(20)
+    recipes_obj = collection.find(
+        {}, {"title":1, "cooking_time": 1, "description": 1, "picture_url": 1}
+    ).limit(20)
     recipes = []
     for item in recipes_obj:
         item["_id"] = str(item["_id"])
