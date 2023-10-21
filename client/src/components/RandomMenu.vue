@@ -67,7 +67,6 @@ export default {
 .receptions {
   // display: none;
   background-color: #fff;
-  
   &__products{
     display: flex;
     gap: 30px;
@@ -75,10 +74,10 @@ export default {
     flex-flow: column wrap;
     
   }
-
+  
   &__title {
     text-align: center;
-    margin-top: 80px;
+    // margin-top: 80px;
     color: #000;
     font-family: Montserrat;
     font-size: 36px;

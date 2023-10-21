@@ -18,7 +18,7 @@
         (🧠 Приготовлено <span>нейросетью</span>)
       </div>
       <div class="card__block">
-          <img src="../img/burger.png" alt="" class="card__img">
+          <img src="../img/neuro-soup.png" alt="" class="card__img">
           <div class="card__desc">
             <span class="card__desc--time">
               ~{{ item.time }}
@@ -56,7 +56,7 @@ export default {
 }
 
 .recomendation {
-
+  // margin-bottom: 50px;
   color: #fff;
   // margin-top: 137px;
   display: flex;
@@ -117,7 +117,7 @@ export default {
     font-style: italic;
     font-weight: 300;
     line-height: normal;
-
+    
     span {
       text-decoration: underline;
       color: #FF64E6;
@@ -132,7 +132,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  
   &__title {
     text-align: center;
     color: linear-gradient(180deg, rgba(255,129,57,1) 0%, rgba(223,80,0,1) 100%);
@@ -153,16 +153,21 @@ export default {
     font-style: italic;
     font-weight: 400;
     line-height: normal;
-    background-color: #ffffff51;
-    border-radius: 25px;
-
+    
     & img{
-      top: 5px;
       position: absolute;
+      transform: translateY(100px);
     }
   }
-
+  
   &__desc {
+    padding: 30px;
+    width: 1200px;
+    height: 333px;
+    margin: 0 auto;
+    padding-left: 180px;
+    background-color: #ffffff51;
+    border-radius: 25px;
     display: flex;
     row-gap: 24px;
     flex-direction: column;
