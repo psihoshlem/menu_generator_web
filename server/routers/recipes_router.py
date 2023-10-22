@@ -26,7 +26,7 @@ async def get_image(filename: str):
 @router.post("/recipes", tags=["recipes"])
 async def get_recipes_with_query(query: QuerySchema):
     query_list = [
-        {"ingredients.name": item.capitalize()+" "} for item in query.desirable_ingredients
+        {"ingredients.name": item.capitalize()} for item in query.desirable_ingredients
     ]
     query_list.append(
         {"ingredients.name": {"$nin": query.excluded_ingredients}}
