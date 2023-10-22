@@ -14,7 +14,7 @@
         <div class="search__block" v-if="focused" @click.stop>
           <div class="search__products">
             <a href="" v-for="item in item_search" :key="item.id">
-              <span class="product">
+              <span class="product" @click="go_to_recipe(item)">
                 {{ item.title }},
               </span>
             </a>
@@ -28,9 +28,9 @@
                   <input type="text" placeholder="Введите желаемый продукт" v-model="input_add_product" v-on:keyup.enter="add_product(input_add_product)">
                   <button class="add-btn" @click="add_product(input_add_product)">Добавить</button>
                 </div>
-                <span>Добавлено:</span>
+                <span v-if="added_products.length !== 0">Добавлено:</span>
                 <div class="adds_products">
-                  <label class="adds_product" v-for="item in added_products" :key="item.id">
+                  <label class="adds_product" v-for="item in added_products" :key="item.id" @click="rm_search_product(item, 'added')">
                     {{item}}
                   </label>
                 </div>
@@ -41,9 +41,9 @@
                   <input type="text" placeholder="Введите нежелаемый продукт" v-model="input_exclude_product" v-on:keyup.enter="exclude_product(input_exclude_product)">
                   <button class="del-btn" @click="exclude_product(input_exclude_product)">Исключить</button>
                 </div>
-                <span>Исключено:</span>
+                <span v-if="excluded_products.length !== 0">Исключено:</span>
                 <div class="dels_products">
-                  <label class="dels_product" v-for="item in excluded_products" :key="item.id">
+                  <label class="dels_product" v-for="item in excluded_products" :key="item.id" @click="rm_search_product(item, 'excluded')">
                     {{ item }}
                   </label>
                 </div>
@@ -77,7 +77,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
       value_input: '',
       input_add_product: '',
@@ -112,6 +111,28 @@ export default {
           this.item_search = this.finish_search.slice(0,5)
         })
       }
+    },
+    rm_search_product(item, key){
+      let search
+      if (key == "added"){
+        for (search in this.added_products){
+          if (this.added_products[search] === item){
+            this.added_products.splice(this.added_products[search], 1)
+            break
+          }
+        }
+      } else {
+        for (search in this.excluded_products){
+          if (this.excluded_products[search] === item){
+            this.excluded_products.splice(this.excluded_products[search], 1)
+            break
+          }
+        }
+      }
+      this.input_writing()
+    },
+    go_to_recipe(item) {
+      this.$router.push({ name: 'recipe', params: { item_info: item._id } })
     },
     go_to_search(){
       this.focused = false

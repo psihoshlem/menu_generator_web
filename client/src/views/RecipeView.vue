@@ -84,7 +84,6 @@ export default {
     await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
       .then((response) => {
         if (response.status == 200) {
-            console.log(response.data)
             this.recipe = response.data
             this.recipe_star = this.recipe["number of servings"]
         }
