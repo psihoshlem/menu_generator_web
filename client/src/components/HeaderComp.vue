@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :style="check_color()">
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
@@ -8,7 +8,7 @@
         <div class="header__nav">
           <a href="" class="header__nav--link" @click="go_home()">Главная</a>
           <a href="" class="header__nav--link">Все рецепты</a>
-          <a href="" class="header__nav--link">Съедено</a>
+          <a href="" class="header__nav--link" @click="go_favorites()">Съедено</a>
           <a href="" class="header__nav--link" @click="go_seach()">Поиск</a>
           <a href="" class="header__nav--link">Избранное</a>
         </div>
@@ -31,6 +31,7 @@ export default {
       auth: false
     }
   },
+  props: ['back_color'],
   methods: {
     go_auth() {
       router.push('/auth')
@@ -44,6 +45,12 @@ export default {
     },
     go_seach(){
       router.push('/search')
+    },
+    go_favorites(){
+      router.push('/eaten')
+    },
+    check_color(){
+      return "background-color:"+this.back_color
     }
   },
   async mounted(){
