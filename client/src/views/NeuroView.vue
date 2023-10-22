@@ -1,5 +1,5 @@
 <template>
-  <HeaderComp :back_color="color"/>
+  <HeaderComp :style="style_for_header"/>
   <div class="neuro" >
     <div class="neuro__info">
       <div class="neuro__info-title">
@@ -22,7 +22,10 @@ export default {
   },
   data(){
     return{
-      color: "black"
+      style_for_header: {
+        color_text: "white",
+        brackground_color: "black"
+      }
     }
   }
 }

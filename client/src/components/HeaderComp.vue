@@ -1,21 +1,21 @@
 <template>
-  <header class="header" :style="check_color()">
+  <header class="header" :style="background_color()">
     <div class="inner">
       <div class="header__block">
         <div class="header__logo">
           <img src="./../img/mainUmomLogo.png" @click="go_home()">
         </div>
         <div class="header__nav">
-          <a href="" class="header__nav--link" @click="go_home()">Главная</a>
-          <a href="" class="header__nav--link">Все рецепты</a>
-          <a href="" class="header__nav--link" @click="go_favorites()">Съедено</a>
-          <a href="" class="header__nav--link" @click="go_seach()">Поиск</a>
-          <a href="" class="header__nav--link">Избранное</a>
+          <a href="" class="header__nav--link" :style="text_color()" @click="go_home()">Главная</a>
+          <a href="" class="header__nav--link" :style="text_color()">Все рецепты</a>
+          <a href="" class="header__nav--link" :style="text_color()" @click="go_favorites()">Съедено</a>
+          <a href="" class="header__nav--link" :style="text_color()" @click="go_seach()">Поиск</a>
+          <a href="" class="header__nav--link" :style="text_color()">Избранное</a>
         </div>
-        <div class="header__info header__nav--link" v-if="auth" @click="go_exit()">
+        <div class="header__info header__nav--link" :style="text_color()" v-if="auth" @click="go_exit()">
           Выход
         </div>
-        <div class="header__info header__nav--link" v-else @click="go_auth">
+        <div class="header__info header__nav--link" :style="text_color()" v-else @click="go_auth">
           Вход / Регистрация
         </div>
       </div>
@@ -31,7 +31,7 @@ export default {
       auth: false
     }
   },
-  props: ['back_color'],
+  props: ['style'],
   methods: {
     go_auth() {
       router.push('/auth')
@@ -49,8 +49,19 @@ export default {
     go_favorites(){
       router.push('/eaten')
     },
-    check_color(){
-      return "background-color:"+this.back_color
+    background_color(){
+      if (this.style){
+        return "background-color:"+this.style.brackground_color
+      } else {
+        return
+      }
+    },
+    text_color(){
+      if (this.style){
+        return "color:"+this.style.color_text
+      } else {
+        return
+      }
     }
   },
   async mounted(){
