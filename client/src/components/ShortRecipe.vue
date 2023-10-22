@@ -16,7 +16,7 @@
         <span>~{{ recipe.cooking_time }} мин</span>
       </div>
       <div class="foodcard__recipe-composition">
-        <span>Состав: {{ recipe.compound }}</span>
+        <span>Описание: {{ recipe.compound }}</span>
       </div>
       <div class="foodcard__recipe-description">
         <span>{{ recipe.description }}</span>
@@ -124,7 +124,7 @@ export default {
       display: flex;
       align-items: center;
       font-size: 16px;
-      font-weight: 300;
+      font-weight: 800;
       font-style: italic;
     }
 
@@ -133,6 +133,7 @@ export default {
       align-items: center;
       font-size: 16px;
       font-weight: 500;
+      font-style: italic;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
