@@ -36,18 +36,25 @@
         </div>
       </div>
       <div class="neuro_btn">
-        <button>Подробнее</button>
+        <button @click="go_to_neuro">Подробнее</button>
       </div>
     </div>
   </section>
 </template>
 <script>
+import router from '@/router';
+
 export default {
   data() {
     return {
       recipe_neuro: [{ name: "Бургер - три сыра", time: "20:00", compound: 'Сыр масдам, Помидоры, Сыр пармезан, Сыр твердый, Листья салата, Хлеб, Котлета, Кунжут', description: 'Только настоящий сырный мозг мог создать такой бургер! В его основе лежат три сыра, которые распределены между нежнейшей котлетой, ломтиком помидора, листьями салата. А сверху посыпано кунжутом. Вы точно не останетесь равнодушным!' }],
       focused: false,
       value_input: ''
+    }
+  },
+  methods:{
+    go_to_neuro(){
+      router.push('/neuro_recipe')
     }
   }
 }

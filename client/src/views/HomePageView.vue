@@ -15,14 +15,6 @@ export default {
     RecipesFinder,
     RandomMenu,
     HeaderComp
-  },
-  methods: {
-    test() {
-      console.log("focus")
-    },
-    test_focus() {
-      console.log("test_focus")
-    }
   }
 }
 </script>

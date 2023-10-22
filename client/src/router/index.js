@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '../views/HomePageView.vue'
 import AuthView from '../views/AuthView.vue'
 import SearchView from '../views/SearchView.vue'
-import CreateRecipeView from '../views/CreateRecipeView.vue'
+import NeuroView from '../views/NeuroView.vue'
 import EatenView from '../views/EatenView.vue'
 import RecipeView from '../views/RecipeView.vue'
 
@@ -24,9 +24,9 @@ const routes = [
     component: SearchView
   },
   {
-    path: '/create_recipe',
-    name: 'create_recipe',
-    component: CreateRecipeView
+    path: '/neuro_recipe',
+    name: 'neuro_recipe',
+    component: NeuroView
   },
   {
     path: '/eaten',

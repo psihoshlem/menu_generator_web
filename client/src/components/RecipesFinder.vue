@@ -7,6 +7,7 @@
           <input type="text" class="search__input"
             placeholder="Давайте найдем что то вкусное" @focus="openModal"
             v-model="value_input"
+            @input="input_writing()"
           >
         </div>
         <span v-if="focused" class="modal" @click="closeModal"></span>
@@ -24,29 +25,26 @@
               <div class="search__params-add-products">
                 <span>+ Включить продукты:</span>
                 <div class="add-product">
-                  <input type="text" placeholder="Введите желаемый продукт">
-                  <button class="add-btn">Добавить</button>
+                  <input type="text" placeholder="Введите желаемый продукт" v-model="input_add_product" v-on:keyup.enter="add_product(input_add_product)">
+                  <button class="add-btn" @click="add_product(input_add_product)">Добавить</button>
                 </div>
                 <span>Добавлено:</span>
                 <div class="adds_products">
-                  <label class="adds_product">
-                    Картошка
-                  </label>
-                  <label class="adds_product">
-                    Картошка
+                  <label class="adds_product" v-for="item in added_products" :key="item.id">
+                    {{item}}
                   </label>
                 </div>
               </div>
               <div class="search__params-del-products">
                 <span>- Исключить продукты:</span>
                 <div class="del-product">
-                  <input type="text" placeholder="Введите нежелаемый продукт">
-                  <button class="del-btn">Исключить</button>
+                  <input type="text" placeholder="Введите нежелаемый продукт" v-model="input_exclude_product" v-on:keyup.enter="exclude_product(input_exclude_product)">
+                  <button class="del-btn" @click="exclude_product(input_exclude_product)">Исключить</button>
                 </div>
                 <span>Исключено:</span>
                 <div class="dels_products">
-                  <label class="dels_product">
-                    Капуста
+                  <label class="dels_product" v-for="item in excluded_products" :key="item.id">
+                    {{ item }}
                   </label>
                 </div>
               </div>
@@ -67,26 +65,57 @@
               <input type="number" max="5" value="0">
             </div>
           </div>
-          <div class="search__block--btn btn" @click="focused = false">Поиск</div>
+          <div class="search__block--btn btn" @click="go_to_search()">Поиск</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
-  // props: ['onLogin'],
   data() {
     return {
       search_product: [{ name: "Пицца с анананасами" }, { name: "Пицца вкусняшка" }],
       focused: false,
-      value_input: ''
+      value_input: '',
+      input_add_product: '',
+      input_exclude_product: '',
+      added_products: [],
+      excluded_products: [],
+      finish_search: []
     }
   },
-  methods: {
+  methods:{
+    add_product(input_add_product){
+      this.added_products.push(input_add_product)
+      this.input_add_product = ''
+    },
+    exclude_product(input_exclude_product){
+      this.excluded_products.push(input_exclude_product)
+      this.input_exclude_product = ''
+    },
+    input_writing(){
+      if (localStorage.getItem('login')){
+        axios.post('http://localhost:8000/recipes', {
+          login: String(localStorage.getItem('login')),
+          query: this.value_input,
+          desirable_ingredients: this.added_products,
+          excluded_ingredients: this.excluded_products
+        })
+        .then((response) => {
+          this.finish_search = response.data
+        })
+      }
+    },
+    go_to_search(){
+      this.focused = false
+      const str_output = JSON.stringify({login: String(localStorage.getItem('login')), query: this.value_input, desirable_ingredients: this.added_products, excluded_ingredients: this.excluded_products})
+      this.$router.push({ path: '/search', query:{output_data: str_output}});
+    },
     openModal() {
       this.focused = true;
-      // Добавьте обработчик события для закрытия модального окна при клике вне его
       window.addEventListener('click', this.closeModal);
     },
     closeModal(event) {
