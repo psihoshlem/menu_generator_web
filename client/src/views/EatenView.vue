@@ -1,5 +1,5 @@
 <template>
-  <HeaderComp :back_color="color"/>
+  <HeaderComp />
   <section class="receptions">
     <div class="inner">
       <div class="receptions__title">{{ msg }}</div>
@@ -25,7 +25,6 @@ export default {
     return{
       msg:'',
       all_recipes: [],
-      color: 'black'
     }
   },
   async created() {
