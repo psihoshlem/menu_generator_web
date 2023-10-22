@@ -28,7 +28,7 @@ export default {
     }
   },
   async created() {
-    if (localStorage.getItem('login')){
+    if (String(localStorage.getItem('login')).length > 0){
       await axios.get('http://localhost:8000/get_eaten/?login=' + String(localStorage.getItem('login')), {})
       .then((response) => {
         if (response.status == 200) {

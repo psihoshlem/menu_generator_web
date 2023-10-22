@@ -6,9 +6,14 @@
                     <div class="recipe__title-name">
                         <span>{{  recipe.title }}</span>
                     </div>
-                    <div class="recipe__title-rating">
-                        <div class="rating--item" v-for="star in recipe_star" :key="star.id">&#9733;</div>
+                    <div class="recipe__title-rating" :data-total-value="check_review_star">
+                        <div class="rating--item" data-item-value="5" @click="send_review(5)">&#9733;</div>
+                        <div class="rating--item" data-item-value="4" @click="send_review(4)">&#9733;</div>
+                        <div class="rating--item" data-item-value="3" @click="send_review(3)">&#9733;</div>
+                        <div class="rating--item" data-item-value="2" @click="send_review(2)">&#9733;</div>
+                        <div class="rating--item" data-item-value="1" @click="send_review(1)">&#9733;</div>
                     </div>
+                    {{ msg }}
                     <div class="recipe__title-time">
                         <img src="./../img/recipe_clock.png" alt="">
                         <span>~{{  recipe.cooking_time }} мин</span>
@@ -69,7 +74,9 @@ export default {
   data(){
     return{
         recipe: {},
-        recipe_star: 0
+        recipe_star: 0,
+        check_review_star: 0,
+        msg: ''
     }
   },
   async created() {
@@ -77,6 +84,7 @@ export default {
     await axios.get('http://localhost:8000/recipes/' +this.$route.params.item_info, {})
       .then((response) => {
         if (response.status == 200) {
+            console.log(response.data)
             this.recipe = response.data
             this.recipe_star = this.recipe["number of servings"]
         }
@@ -96,6 +104,22 @@ export default {
             return item.unit
         } else {
             return item.count + item.unit
+        }
+    },
+    send_review(star){
+        if (localStorage.getItem('login')){
+            axios.post('http://localhost:8000/add_review', {
+                login:String(localStorage.getItem('login')),
+                stars:Number(star),
+                recipe_id:this.recipe._id
+            })
+            .then((response) => {
+                if (response.status == 200) {
+                    this.check_review_star = star
+                }
+            })
+        } else {
+            this.msg = "Для начала войдите в аккаунт"
         }
     }
   }
@@ -152,7 +176,8 @@ export default {
 
         .rating--item{
             font-size: 25px;
-            color: #FFC700;
+            // color: #FFC700;
+            color: #dcdcdc;
             transition: .2s;
         }
 

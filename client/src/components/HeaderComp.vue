@@ -39,6 +39,7 @@ export default {
     go_exit(){
       this.auth = false
       localStorage.setItem('auth_status', "false")
+      localStorage.setItem('login', '')
     },
     go_home(){
       router.push('/')
