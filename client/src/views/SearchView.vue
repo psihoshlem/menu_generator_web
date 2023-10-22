@@ -39,7 +39,11 @@ export default {
       axios.post('http://localhost:8000/recipes',searchItems)
       .then((response) => {
         this.all_recipes = response.data
-        this.msg = "Рецепты по вашему запросу:"
+        if (response.data.length > 0){
+          this.msg = "Рецепты по вашему запросу:"
+        } else {
+          this.msg = "Ничего не найдено"
+        }
       })
     } else {
       this.msg = "Перейдите на главную страницу и сделайте запрос..."

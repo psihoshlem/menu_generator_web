@@ -13,9 +13,9 @@
         <span v-if="focused" class="modal" @click="closeModal"></span>
         <div class="search__block" v-if="focused" @click.stop>
           <div class="search__products">
-            <a href="" v-for="item in search_product" :key="item.id">
+            <a href="" v-for="item in item_search" :key="item.id">
               <span class="product">
-                {{ item.name }}
+                {{ item.title }},
               </span>
             </a>
           </div>
@@ -84,17 +84,20 @@ export default {
       input_exclude_product: '',
       added_products: [],
       excluded_products: [],
-      finish_search: []
+      finish_search: [],
+      item_search: []
     }
   },
   methods:{
     add_product(input_add_product){
       this.added_products.push(input_add_product)
       this.input_add_product = ''
+      this.input_writing()
     },
     exclude_product(input_exclude_product){
       this.excluded_products.push(input_exclude_product)
       this.input_exclude_product = ''
+      this.input_writing()
     },
     input_writing(){
       if (localStorage.getItem('login')){
@@ -106,6 +109,7 @@ export default {
         })
         .then((response) => {
           this.finish_search = response.data
+          this.item_search = this.finish_search.slice(0,5)
         })
       }
     },
@@ -334,7 +338,7 @@ export default {
     .product {
       color: #000;
       font-family: Montserrat;
-      font-size: 24px;
+      font-size: 16px;
       font-style: italic;
       font-weight: 400;
       line-height: normal;
