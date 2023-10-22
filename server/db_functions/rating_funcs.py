@@ -21,5 +21,5 @@ def get_eaten(login:str):
     result = collection.find({"login": login})
     eaten = []
     for item in result:
-        eaten.append(get_short_recipe_by_id(str(item["_id"])))
+        eaten.append(get_short_recipe_by_id(str(item["recipe_id"])))
     return eaten
