@@ -43,6 +43,11 @@ export default {
     } else {
       this.msg = "Упс... Для начала войдите в аккаунт"
     }
+  },
+  methods:{
+    go_to_recipe(item) {
+      this.$router.push({ name: 'recipe', params: { item_info: item._id } })
+    },
   }
 }
 </script>
